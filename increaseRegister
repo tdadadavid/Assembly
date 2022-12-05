@@ -1,0 +1,59 @@
+.data
+			newLine: .asciiz "\n"
+
+.text
+		main:
+			addi $s0 , $zero , 4							# $s0 = 0 + 4
+		
+			jal increaseRegister							# jump and go to this address
+			
+			
+			# print new line
+			li $v0, 4
+			la $a0 , newLine
+			syscall
+		
+			# print the former value in $s0
+			li $v0 , 1
+			move $a0 , $s0
+			syscall
+		
+		# terminate the code
+		li $v0 ,10
+		syscall
+		
+		increaseRegister:
+			addi $sp , $sp ,-4							# create a 4 byte space in the stack
+			sw $s0 , 0($sp)									# store the value of $s0 into offset or index of the space created in stack
+			
+			
+			mult $s0 , $s0
+			mflo $s0
+			#addi $s0 , $s0 ,4								# increment the value by 4
+			
+			#print the new value of $s0
+			li $v0 , 1
+			move $a0 , $s0 
+			syscall
+			
+			# restore $s0  
+			lw $s0 , 0($sp)
+			
+			#restore the stack to its orignal state
+			addi $sp , $sp ,4								# since we took 4 bytes from it , so we put 4 back into it
+			
+			
+			# return the value
+			jr $ra
+			
+			
+			
+			# NOTE: before you restore the stack 
+			# first restore the value of the $s registers from the stack
+			
+			
+			
+			
+			
+		
+		

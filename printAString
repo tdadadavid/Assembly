@@ -1,0 +1,7 @@
+.data 
+	mySecretMessage: .asciiz "My name is King"
+	
+.text
+	li $v0, 4
+	la $a0, mySecretMessage
+	syscall

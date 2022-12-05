@@ -1,0 +1,7 @@
+.data
+	PI: .float 3.129
+
+.text
+	li    $v0 , 2 		# 2 is for flaot , prepare to print a float
+	lwc1  $f12 , PI 	#lwc1 = load word to coprocessor 1 (thatz where floats are stored)
+	syscall

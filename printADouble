@@ -1,0 +1,13 @@
+.data
+	myFirstDouble: .double 8.909
+	zeroDouble: .double 0.0
+
+.text
+	# we need to use co-proccessor 1, beacuse that's
+	# were we see decimal* registers (in my own words)
+	ldc1 $f2, myFirstDouble 
+	ldc1 $f0 , zeroDouble  	# always try to use even registers like $f0, $f2, $f4, $f6
+	
+	li $v0,  3		# prepare to print a double
+	add.d $f12 , $f2, $f0 	# $f12 = $f2 + $f0
+	syscall 
